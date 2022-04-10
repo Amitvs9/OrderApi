@@ -1,8 +1,8 @@
 #Application Module
-module-name: OrderApiApplication
+module-name: Order-Api Application
 api-version: 1
 server:
-  port: 8081
+  port: 8080
 
 #Api endpoint and connection-timeout & read-timeout.
 order:
@@ -22,7 +22,7 @@ spring:
 
   #DataSource
   datasource:
-    url: jdbc:h2:file:./data/Order
+    url: jdbc:h2:file:./data/OrderDB
     driver-class-name: org.h2.Driver
     username: sa
     password: airport

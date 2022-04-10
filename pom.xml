@@ -8,7 +8,7 @@
         <version>2.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.av.orderapi</groupId>
+    <groupId>com.vz.orderapi</groupId>
     <artifactId>orderapi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>OrderAPI</name>
@@ -70,9 +70,7 @@
     </dependencies>
 
     <build>
-
         <plugins>
-
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <dependencies>
@@ -97,6 +95,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>order-api</finalName>
     </build>
 
 </project>
