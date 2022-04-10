@@ -1,4 +1,4 @@
-# factory: Order-API
+# ☕: Order-API
 <a href="https://foojay.io/works-with-openjdk"><img align="right" src="https://github.com/foojayio/badges/raw/main/works_with_openjdk/Works-with-OpenJDK.png" width="100"></a>
 
 
@@ -14,7 +14,8 @@ The order API Backend allows performing following operation.
 
 
 ## :shield:	 Code coverage
-- ![image](https://user-images.githubusercontent.com/45259611/162630700-4ff7f67f-1417-44e8-9dcc-0b4f853c07d5.png)
+<img width="752" alt="sonar" src="https://user-images.githubusercontent.com/45259611/162644047-e2c65410-9903-4886-8a85-774b64049c38.png">
+
 
 ## :balance_scale:	Assumptions :
 - Validations for Order creation are as 
@@ -28,6 +29,7 @@ The order API Backend allows performing following operation.
 - Spring-Boot
 - JPA
 - In-Memory Database H2
+- Open Api 3.0 (swagger)
 - Maven
 - Git Hub
 
@@ -48,7 +50,7 @@ The order API Backend allows performing following operation.
 Now application is up and running on http://localhost:8080/
 
 ## :grey_question:	How to test endpoints
-### :spider_web:  
+### :spider_web:  Order-API
  - Open the URL in your browser : http://localhost:8080
  - User will see a swagger page with all the defined specs of the service.
  - There will have 2 Tags you can see.
@@ -56,12 +58,14 @@ Now application is up and running on http://localhost:8080/
 
 ### 1. Order-controller
 #### Description:
-- Endpoint 1: `GET /order`
+- Endpoint 1: `GET /order/v1`
   - get all the orders with pagination support 
-- Endpoint 2: `POST /order`
+- Endpoint 2: `POST /order/v1`
   - Allows user to create order with post request body
 
 
 ### :test_tube: Testing using Swagger UI
+![swagger copy](https://user-images.githubusercontent.com/45259611/162643934-9f371589-4eb7-4a4e-9a96-780734b6fd89.png)
+
 
 
