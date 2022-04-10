@@ -1,0 +1,33 @@
+#Application Module
+module-name: OrderApiApplication
+api-version: 1
+server:
+  port: 8081
+
+#Api endpoint and connection-timeout & read-timeout.
+order:
+  api:
+    endpoint: https://reqres.in/api/users?page={page}&per_page={perpage}}
+    connectTimeout: 10000
+    readTimeout: 10000
+    page: 1
+    perPage: 10
+
+
+spring:
+  profiles:
+    active: local
+  application:
+    name: '@project.artifactId@'
+
+  #DataSource
+  datasource:
+    url: jdbc:h2:file:./data/Order
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: airport
+  jpa:
+    show-sql: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
