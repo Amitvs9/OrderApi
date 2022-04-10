@@ -14,8 +14,7 @@ The order API Backend allows performing following operation.
 
 
 ## :shield:	 Code coverage
-
-
+- ![image](https://user-images.githubusercontent.com/45259611/162630700-4ff7f67f-1417-44e8-9dcc-0b4f853c07d5.png)
 
 ## :balance_scale:	Assumptions :
 - Validations for Order creation are as 
