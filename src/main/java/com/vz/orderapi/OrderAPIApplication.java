@@ -2,13 +2,11 @@ package com.vz.orderapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
-@EnableAsync
-public class OrderApplication {
+public class OrderAPIApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run( OrderApplication.class, args );
+        SpringApplication.run( OrderAPIApplication.class, args );
     }
 }

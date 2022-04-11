@@ -25,7 +25,7 @@ spring:
     url: jdbc:h2:file:./data/OrderDB
     driver-class-name: org.h2.Driver
     username: sa
-    password: airport
+    password: orderAPI
   jpa:
     show-sql: false
     database-platform: org.hibernate.dialect.H2Dialect

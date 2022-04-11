@@ -3,11 +3,14 @@ package com.vz.orderapi.controllers;
 
 import com.vz.orderapi.dto.OrderDTO;
 import com.vz.orderapi.entities.OrderEntity;
-import com.vz.orderapi.services.OrderExecutor;
+import com.vz.orderapi.errors.ErrorCodes;
+import com.vz.orderapi.errors.OrderException;
+import com.vz.orderapi.services.OrderService;
 import com.vz.orderapi.util.Constant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +30,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final OrderExecutor orderExecutor;
+    private final OrderService orderService;
 
     /**
      * Gets all the order from database
@@ -39,7 +42,7 @@ public class OrderController {
     public ResponseEntity<List<OrderEntity>> getAllOrders(
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size) {
-        List<OrderEntity> orderEntities = orderExecutor.getAllOrders(page,size);
+        List<OrderEntity> orderEntities = orderService.getAllOrders(page,size);
         return ResponseEntity.status( HttpStatus.OK).body(orderEntities);
     }
 
@@ -50,8 +53,11 @@ public class OrderController {
      * @return generated orderId foe created order.
      */
     @PostMapping(Constant.VERSION)
-    public ResponseEntity<OrderEntity> createOrder(@RequestBody @Valid OrderDTO orderDTO) {
-        OrderEntity orderId= orderExecutor.createOrder(orderDTO);
+    public ResponseEntity<Long> createOrder(@RequestBody @Valid OrderDTO orderDTO, Errors errors) {
+        if (errors.hasErrors() && errors.getFieldError()!=null ) {
+            throw new OrderException(ErrorCodes.INVALID_ORDER, errors.getFieldError().getField()+":"+errors.getFieldError().getDefaultMessage());
+        }
+        Long orderId= orderService.createOrder(orderDTO);
        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
     }
 }

@@ -3,7 +3,7 @@ package com.vz.orderapi.controllers;
 
 import com.vz.orderapi.dto.OrderDTO;
 import com.vz.orderapi.entities.OrderEntity;
-import com.vz.orderapi.services.OrderExecutor;
+import com.vz.orderapi.services.OrderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -36,7 +36,7 @@ public class OrderControllerTest {
     @Autowired
     MockMvc mockMvc;
     @MockBean
-    OrderExecutor orderExecutor;
+    OrderService orderService;
 
     private OrderEntity orderEntity;
 
@@ -54,7 +54,7 @@ public class OrderControllerTest {
 
     @Test
     public void testGetAllOrderWithPagination() throws Exception {
-        when(orderExecutor.getAllOrders(0, 1)).thenReturn(Collections.singletonList(orderEntity));
+        when(orderService.getAllOrders(0, 1)).thenReturn(Collections.singletonList(orderEntity));
 
         RequestBuilder productPage0Size1 = getAllRequestBuilder(0,1);
 
@@ -70,7 +70,7 @@ public class OrderControllerTest {
 
     @Test
     public void testCreateOrderForGivenEmailAndProductId() throws Exception {
-        when(orderExecutor.createOrder( Mockito.any() )).thenReturn(orderEntity);
+        when(orderService.createOrder( Mockito.any() )).thenReturn(orderEntity.getOrderId());
 
         RequestBuilder productPage0Size1 = postRequestBuilder();
 
