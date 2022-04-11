@@ -1,0 +1,80 @@
+openapi: 3.0.1
+info:
+  title: Order-Api Application
+  version: "1"
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /order/v1:
+    get:
+      tags:
+      - order-controller
+      operationId: getAllOrders
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderEntity'
+    post:
+      tags:
+      - order-controller
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+components:
+  schemas:
+    OrderDTO:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+        email:
+          type: string
+    OrderEntity:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          format: int64
+        productId:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
