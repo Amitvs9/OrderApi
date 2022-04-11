@@ -1,4 +1,4 @@
-# ☕: Order-API
+# ☕ Order-API
 <a href="https://foojay.io/works-with-openjdk"><img align="right" src="https://github.com/foojayio/badges/raw/main/works_with_openjdk/Works-with-OpenJDK.png" width="100"></a>
 
 
@@ -14,13 +14,14 @@ The order API Backend allows performing following operation.
 
 
 ## :shield:	 Code coverage
-<img width="752" alt="sonar" src="https://user-images.githubusercontent.com/45259611/162644047-e2c65410-9903-4886-8a85-774b64049c38.png">
+<img width="653" alt="junitCoverage" src="https://user-images.githubusercontent.com/45259611/162827644-a7f97805-e141-4346-ac09-aefc79be6a82.png">
 
 
-## :balance_scale:	Assumptions :
+## :balance_scale:	Validation Assumptions :
 - Validations for Order creation are as 
-  - emailId should be valid email id format
-  - productId cannot have negative number
+  - emailId and productId both are mandatory
+  - emailId should be valid email format
+  - productId cannot have negative or zero number
  
 ## :hammer_and_wrench:	Tech-Stack
 ![Java](https://img.shields.io/badge/-Java-000?&logo=Java&logoColor=007396)
@@ -32,6 +33,7 @@ The order API Backend allows performing following operation.
 - Open Api 3.0 (swagger)
 - Maven
 - Git Hub
+- Docker
 
 ## :memo: Steps to run the application
 
@@ -53,7 +55,7 @@ Now application is up and running on http://localhost:8080/
 ### :spider_web:  Order-API
  - Open the URL in your browser : http://localhost:8080
  - User will see a swagger page with all the defined specs of the service.
- - There will have 2 Tags you can see.
+ - There will have 2 endpoints you can see.
 
 
 ### 1. Order-controller
@@ -66,6 +68,10 @@ Now application is up and running on http://localhost:8080/
 
 ### :test_tube: Testing using Swagger UI
 ![swagger copy](https://user-images.githubusercontent.com/45259611/162643934-9f371589-4eb7-4a4e-9a96-780734b6fd89.png)
+
+### 🗄️: view/download openapi yaml file 
+- application: orderApi/OrderApi/src/main/resources/api-docs.yaml
+- download: Open the URL in your browser :http://localhost:8080/v3/api-docs.yaml
 
 
 
