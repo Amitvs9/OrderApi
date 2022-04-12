@@ -85,7 +85,7 @@ public class OrderServiceTest {
 
 
     @Test
-    public void testCreateOrderWithProductIdAndEmailId() throws ExecutionException, InterruptedException {
+    public void testCreateOrderWithProductIdAndEmailId() {
         doAnswer(
                 (InvocationOnMock invocation) -> {
                     ((Runnable) invocation.getArguments()[0]).run();
