@@ -15,5 +15,5 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public class Response {
-    private List<Data> data;
+    private List<Customer> data;
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * OrderController
@@ -53,7 +54,7 @@ public class OrderController {
      * @return generated orderId foe created order.
      */
     @PostMapping(Constant.VERSION)
-    public ResponseEntity<Long> createOrder(@RequestBody @Valid OrderDTO orderDTO, Errors errors) {
+    public ResponseEntity<Long> createOrder(@RequestBody @Valid OrderDTO orderDTO, Errors errors) throws ExecutionException, InterruptedException {
         if (errors.hasErrors() && errors.getFieldError()!=null ) {
             throw new OrderException(ErrorCodes.INVALID_ORDER, errors.getFieldError().getField()+":"+errors.getFieldError().getDefaultMessage());
         }

@@ -11,7 +11,7 @@ order:
     connectTimeout: 10000
     readTimeout: 10000
     page: 1
-    perPage: 10
+    perPage: 100
 
 
 spring:

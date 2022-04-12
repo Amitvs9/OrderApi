@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Data {
+public class Customer {
 
     @JsonProperty("email")
     private String email;

@@ -1,12 +1,13 @@
 package com.vz.orderapi.webserviceClient;
 
 import com.vz.orderapi.dto.Response;
-import com.vz.orderapi.dto.Data;
+import com.vz.orderapi.dto.Customer;
 import com.vz.orderapi.errors.ErrorCodes;
 import com.vz.orderapi.errors.OrderException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class CustomerApiClient {
         this.perPage = perPage;
     }
 
-    public Data retrieveCustomerDetails(String email){
+    public Customer retrieveCustomerDetails(String email){
         Map<String, Object> params = new HashMap<>();
         params.put(PAGE, page);
         params.put(PERPAGE, perPage);
@@ -46,12 +47,11 @@ public class CustomerApiClient {
                 return apiResponse.getData().stream()
                         .filter( data -> StringUtils.equals(email, data.getEmail())).findFirst()
                         .orElseThrow(() -> new OrderException( ErrorCodes.NOT_FOUND, String.format("EmailId : %s is not Found", email)));
+            }else{
+                throw new OrderException(ErrorCodes.UNKNOWN, "Exception occurred while calling Api");
             }
-        }catch (OrderException exception){
-            throw exception;
-        }catch (Exception exception){
+        }catch (HttpClientErrorException exception){
             throw new OrderException(ErrorCodes.UNKNOWN, "Exception occurred while calling Api");
         }
-        return null;
     }
 }

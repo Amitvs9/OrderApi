@@ -1,6 +1,6 @@
 package com.vz.orderapi.services;
 
-import com.vz.orderapi.dto.Data;
+import com.vz.orderapi.dto.Customer;
 import com.vz.orderapi.dto.OrderDTO;
 import com.vz.orderapi.entities.OrderEntity;
 import com.vz.orderapi.errors.ErrorCodes;
@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -84,7 +85,7 @@ public class OrderServiceTest {
 
 
     @Test
-    public void testCreateOrderWithProductIdAndEmailId() {
+    public void testCreateOrderWithProductIdAndEmailId() throws ExecutionException, InterruptedException {
         doAnswer(
                 (InvocationOnMock invocation) -> {
                     ((Runnable) invocation.getArguments()[0]).run();
@@ -123,8 +124,8 @@ public class OrderServiceTest {
         assertThrows(OrderException.class, () -> orderService.createOrder(formOrderDto()));
     }
 
-    private Data forData() {
-        return Data.builder()
+    private Customer forData() {
+        return Customer.builder()
                 .email("amitv@mail.com")
                 .firstName("Amit")
                 .lastName("Vs")

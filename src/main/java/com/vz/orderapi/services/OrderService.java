@@ -1,6 +1,6 @@
 package com.vz.orderapi.services;
 
-import com.vz.orderapi.dto.Data;
+import com.vz.orderapi.dto.Customer;
 import com.vz.orderapi.dto.OrderDTO;
 import com.vz.orderapi.entities.OrderEntity;
 import com.vz.orderapi.errors.ErrorCodes;
@@ -40,7 +40,7 @@ public class OrderService {
      */
     public Long createOrder(OrderDTO orderDTO) {
         log.info("Create Order for emailId: {} ProductId: {}", orderDTO.getEmail(), orderDTO.getProductId());
-        CompletableFuture<Data> customerDetails = CompletableFuture.supplyAsync(() ->
+        CompletableFuture<Customer> customerDetails = CompletableFuture.supplyAsync(() ->
                 customerApiClient.retrieveCustomerDetails(orderDTO.getEmail()), taskExecutor);
 
         CompletableFuture<Long> productId = CompletableFuture.supplyAsync(() ->
@@ -48,7 +48,7 @@ public class OrderService {
 
         CompletableFuture.allOf(customerDetails, productId);
         try {
-            Data customer = customerDetails.get();
+            Customer customer = customerDetails.get();
             OrderEntity orderEntity = OrderEntity.builder()
                     .email(customer.getEmail())
                     .firstName(customer.getFirstName())
@@ -57,14 +57,12 @@ public class OrderService {
             return orderRepository.save(orderEntity).getOrderId();
         } catch (InterruptedException | ExecutionException exception) {
             log.error("exception occurred while creating order");
-            try {
-                throw exception.getCause() instanceof OrderException ? exception.getCause() : exception;
-            } catch (RuntimeException orderException) {
-                throw orderException;
-            } catch (Throwable impossible) {
-                throw new OrderException(ErrorCodes.UNKNOWN, "Something went wrong can not create Order");
-            }
+            if (exception.getCause() instanceof OrderException)
+                throw (OrderException) exception.getCause();
+            else
+                log.error(exception.getLocalizedMessage());
         }
+        return null;
     }
 
     /**

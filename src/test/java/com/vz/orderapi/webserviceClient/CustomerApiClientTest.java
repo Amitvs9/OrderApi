@@ -1,7 +1,7 @@
 package com.vz.orderapi.webserviceClient;
 
 import com.vz.orderapi.dto.Response;
-import com.vz.orderapi.dto.Data;
+import com.vz.orderapi.dto.Customer;
 import com.vz.orderapi.errors.OrderException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,7 +56,7 @@ public class CustomerApiClientTest {
                     }
                 } ) )).thenReturn(responseEntity);
         when(responseEntity.getBody()).thenReturn(apiResponse);
-        Data customer = customerApiClient.retrieveCustomerDetails("amitv@mail.com");
+        Customer customer = customerApiClient.retrieveCustomerDetails("amitv@mail.com");
         assertEquals(customer.getEmail(), forData().getEmail());
     }
 
@@ -90,8 +90,8 @@ public class CustomerApiClientTest {
         assertThrows(OrderException.class,()-> customerApiClient.retrieveCustomerDetails("amitv@mail.com"));
     }
 
-    private Data forData( ) {
-        return Data.builder()
+    private Customer forData( ) {
+        return Customer.builder()
                 .email( "amitv@mail.com" )
                 .firstName( "Amit" )
                 .lastName( "Vs" )
